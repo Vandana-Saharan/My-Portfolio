@@ -1,0 +1,10 @@
+function Contact() {
+  return (
+    <section className="py-20 px-10 bg-gray-100 text-center">
+      <h2 className="text-3xl font-bold mb-6">Contact</h2>
+      <p>Email: yourmail@gmail.com</p>
+    </section>
+  )
+}
+
+export default Contact
