@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import profileImage from "../assets/vandana.jpg";
-import resumeFile from "../resume/VANDANA  - Resume (1).docx?url";
+import resumeFile from "../resume/VANDANA_RESUME.docx?url";
 import { useTheme } from "../context/ThemeContext";
 
 export default function Hero() {
