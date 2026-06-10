@@ -11,60 +11,78 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className={`py-24 px-6 ${
+      className={`py-28 px-6 relative overflow-hidden transition-colors duration-300 ${
         theme === "dark" ? "bg-slate-900" : "bg-slate-50"
       }`}
     >
-      <div className="max-w-4xl mx-auto">
+      {/* Decorative Blur Orbs */}
+      <div className="absolute top-1/2 left-0 w-80 h-80 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className={`text-4xl font-bold text-center mb-12 ${
+          className={`text-4xl md:text-5xl font-extrabold text-center mb-16 tracking-tight ${
             theme === "dark" ? "text-white" : "text-slate-900"
           }`}
         >
-          About <span className="text-indigo-500">Me</span>
+          About <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-indigo-400 dark:to-purple-500">Me</span>
         </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className={`rounded-2xl p-8 md:p-12 shadow-lg ${
+          className={`rounded-3xl p-8 md:p-12 shadow-xl border glass-panel transition-all duration-350 ${
             theme === "dark"
-              ? "bg-slate-800/50 border border-slate-700"
-              : "bg-white border border-slate-100"
+              ? "border-slate-800/80 shadow-slate-950/20"
+              : "border-slate-200/60 shadow-slate-100/60"
           }`}
         >
-          <p
-            className={`text-lg leading-relaxed mb-6 ${
-              theme === "dark" ? "text-slate-300" : "text-slate-600"
-            }`}
-          >
-            I started my journey with frontend development and later moved towards
-            backend development. I am passionate about building scalable systems
-            using clean architecture and industry best practices.
-          </p>
-          <p
-            className={`text-lg leading-relaxed mb-6 ${
-              theme === "dark" ? "text-slate-300" : "text-slate-600"
-            }`}
-          >
-            With hands-on experience in <strong>React</strong>,{" "}
-            <strong>Spring Boot</strong>, <strong>MySQL</strong>, and modern
-            tooling, I focus on writing maintainable, reusable, and optimized
-            code. I continuously learn new technologies to stay updated with
-            the evolving tech landscape.
-          </p>
-          <p
-            className={`text-lg leading-relaxed ${
-              theme === "dark" ? "text-slate-300" : "text-slate-600"
-            }`}
-          >
-            In my free time, I explore new frameworks and enjoy sharing knowledge
-            with the developer community.
-          </p>
+          <div className="space-y-6 text-lg leading-relaxed">
+            <p
+              className={theme === "dark" ? "text-slate-300" : "text-slate-650"}
+            >
+              I began my journey as an enthusiastic frontend learner and quickly pivoted to full-fledged 
+              <strong> backend systems engineering</strong>. I am deeply passionate about constructing 
+              secure, optimized, and high-performance server architectures that solve complex real-world problems.
+            </p>
+            <p
+              className={theme === "dark" ? "text-slate-300" : "text-slate-650"}
+            >
+              Currently pursuing my <strong>Master of Computer Applications (MCA)</strong>, I combine theoretical foundations
+              in computer science with practical application stacks. My toolkit covers <strong>React</strong>, 
+              <strong>Spring Boot</strong>, <strong>Node.js / Express</strong>, <strong>MongoDB</strong>, 
+              <strong>MySQL</strong>, and modern CI/CD tooling.
+            </p>
+            <p
+              className={theme === "dark" ? "text-slate-300" : "text-slate-650"}
+            >
+              I take pride in writing clean, reusable code, structuring modular database schemas, 
+              and exploring modern architectural patterns. When I am not coding, I like keeping track of emerging 
+              frameworks and contributing to the open-source community.
+            </p>
+          </div>
+
+          {/* Quick Highlight Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10 pt-8 border-t border-slate-200 dark:border-slate-850">
+            <div className="text-center p-4 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-2xl">
+              <span className="text-2xl block mb-1">🎓</span>
+              <span className={`text-xs font-bold uppercase tracking-wider block mb-1 ${theme === "dark" ? "text-slate-500" : "text-slate-400"}`}>Education</span>
+              <span className={`text-sm font-semibold ${theme === "dark" ? "text-white" : "text-slate-800"}`}>MCA Student</span>
+            </div>
+            <div className="text-center p-4 bg-purple-500/5 dark:bg-purple-500/10 rounded-2xl">
+              <span className="text-2xl block mb-1">💻</span>
+              <span className={`text-xs font-bold uppercase tracking-wider block mb-1 ${theme === "dark" ? "text-slate-500" : "text-slate-400"}`}>Focus</span>
+              <span className={`text-sm font-semibold ${theme === "dark" ? "text-white" : "text-slate-800"}`}>Backend Systems</span>
+            </div>
+            <div className="text-center p-4 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-2xl col-span-2 md:col-span-1">
+              <span className="text-2xl block mb-1">⚡</span>
+              <span className={`text-xs font-bold uppercase tracking-wider block mb-1 ${theme === "dark" ? "text-slate-500" : "text-slate-400"}`}>Philosophy</span>
+              <span className={`text-sm font-semibold ${theme === "dark" ? "text-white" : "text-slate-800"}`}>Clean & Scalable Code</span>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
