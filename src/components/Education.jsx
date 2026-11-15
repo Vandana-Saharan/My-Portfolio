@@ -1,85 +1,74 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import Blackboard from "./ui/Blackboard";
 import { educationData } from "../data/educationData";
-import { useTheme } from "../context/ThemeContext";
+
+function EduCard({ year, degree, institution, achievements, color }) {
+  return (
+    <div
+      className={`relative bg-white border-4 border-black p-6 rounded-3xl shadow-neo hover:-translate-y-1 transition-transform ${color}`}
+    >
+      {/* Year Tag Rotated */}
+      <div className="absolute -top-4 -left-3 bg-black text-white font-mono font-bold py-1 px-3.5 rounded-lg border-2 border-white shadow-sm rotate-[-4deg] text-xs uppercase tracking-wider">
+        {year}
+      </div>
+
+      <div className="mt-3">
+        <h3 className="text-xl font-shrikhand leading-tight mb-1 text-black">
+          {degree}
+        </h3>
+        <p className="font-bold text-sm text-gray-800 mb-3">{institution}</p>
+        <div className="text-sm font-medium bg-gray-50 p-3.5 rounded-xl border-2 border-black/15 text-gray-900 shadow-sm">
+          <ul className="list-disc list-inside space-y-1 font-medium">
+            {achievements.map((ach, i) => (
+              <li key={i}>{ach}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Education() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const { theme } = useTheme();
+  const cardColors = ["bg-indigo-50", "bg-amber-50", "bg-emerald-50"];
 
   return (
     <section
       id="education"
-      ref={ref}
-      className={`py-24 px-6 ${theme === "dark" ? "bg-slate-950" : "bg-white"}`}
+      className="py-10 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto bg-custom-green border-4 border-black rounded-3xl shadow-neo my-4"
     >
-      <div className="max-w-3xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className={`text-4xl font-bold text-center mb-16 ${
-            theme === "dark" ? "text-white" : "text-slate-900"
-          }`}
-        >
-          Education
-        </motion.h2>
+      {/* Header Pill */}
+      <div className="flex justify-center mb-10">
+        <div className="bg-white px-8 py-3 rounded-full border-4 border-black w-fit shadow-neo">
+          <h2 className="text-3xl font-shrikhand text-black tracking-wide">
+            EDUCATION
+          </h2>
+        </div>
+      </div>
 
-        <div className="relative pl-8 md:pl-12 border-l-2 border-indigo-500/30">
-          {educationData.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="relative pb-12 last:pb-0"
-            >
-              <div
-                className={`absolute -left-[41px] md:-left-[49px] top-1 w-4 h-4 rounded-full bg-indigo-500 ring-4 ${
-                  theme === "dark" ? "ring-slate-950" : "ring-white"
-                }`}
-              />
-              <div
-                className={`rounded-2xl p-6 shadow-lg ${
-                  theme === "dark"
-                    ? "bg-slate-800/50 border border-slate-700"
-                    : "bg-slate-50 border border-slate-100"
-                }`}
-              >
-                <span className="text-sm font-semibold text-indigo-500">
-                  {item.year}
-                </span>
-                <h3
-                  className={`text-xl font-bold mt-2 ${
-                    theme === "dark" ? "text-white" : "text-slate-900"
-                  }`}
-                >
-                  {item.degree}
-                </h3>
-                <p
-                  className={`font-medium mt-1 ${
-                    theme === "dark" ? "text-slate-300" : "text-slate-600"
-                  }`}
-                >
-                  {item.institution}
-                </p>
-                <ul className="mt-4 space-y-2">
-                  {item.achievements.map((achievement, i) => (
-                    <li
-                      key={i}
-                      className={`text-sm flex items-start gap-2 ${
-                        theme === "dark" ? "text-slate-400" : "text-slate-500"
-                      }`}
-                    >
-                      <span className="text-indigo-500 mt-0.5">•</span>
-                      {achievement}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Left Side: Timeline Cards */}
+        <div className="w-full lg:w-1/3 flex flex-col gap-8 relative">
+          {/* Dashed timeline backline */}
+          <div className="absolute left-8 top-10 bottom-10 w-1 bg-black border-l-4 border-black border-dashed -z-10 opacity-30" />
+
+          {educationData.map((edu, idx) => (
+            <EduCard
+              key={edu.id}
+              year={edu.year}
+              degree={edu.degree}
+              institution={edu.institution}
+              achievements={edu.achievements}
+              color={cardColors[idx % cardColors.length]}
+            />
           ))}
+        </div>
+
+        {/* Right Side: Blackboard Chalkboard Canvas */}
+        <div className="w-full lg:w-2/3 sticky top-24">
+          <Blackboard />
+          <p className="text-center font-mono font-bold mt-4 bg-white text-black text-xs sm:text-sm px-5 py-2 border-2 border-black rounded-full shadow-neo-sm mx-auto block w-fit">
+            ✨ Bored? Doodle something cool on the chalkboard!
+          </p>
         </div>
       </div>
     </section>

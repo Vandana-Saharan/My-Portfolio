@@ -1,115 +1,111 @@
+/* Load Google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&family=Shrikhand&display=swap");
+
+/* Import Tailwind v4 */
 @import "tailwindcss";
 
+/* =========================================================
+   Theme Configuration - Balanced Neo-Brutalist Palette
+   Complementary Color Theory: Medium periwinkle canvas + warm pop accents
+   ========================================================= */
 @theme {
-  --color-primary: #6366f1;
-  --color-primary-dark: #4f46e5;
-  --color-accent: #14b8a6;
-  --color-accent-dark: #0d9488;
+  /* Medium "little dark" matching canvas (between off-white and deep purple) */
+  --color-custom-bg: #7b9be4;
+
+  /* Purposeful Neo-Brutalist Pastels & Accents */
+  --color-custom-yellow: #fef08a;   /* Warm Honey / Buttercup */
+  --color-custom-pink: #fecdd3;     /* Coral Blossom */
+  --color-custom-green: #bbf7d0;    /* Fresh Mint / Sage */
+  --color-custom-blue: #bae6fd;     /* Crisp Sky / Ice Blue */
+  --color-custom-purple: #ddd6fe;   /* Soft Lavender / Lilac */
+  --color-custom-red: #fca5a5;      /* Warm Coral Red */
+  --color-custom-accent: #fb7185;   /* Action Pop Coral */
+
+  /* Typography */
+  --font-shrikhand: "Shrikhand", cursive;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* High-Contrast Sharp Neo Shadows */
+  --shadow-neo: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-sm: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-lg: 8px 8px 0px 0px rgba(0, 0, 0, 1);
 }
 
-/* Smooth scrolling */
+/* =========================================================
+   Base Styles
+   ========================================================= */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
-}
-
-/* Theme-based backgrounds */
-.light {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-}
-
-.dark {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  scroll-padding-top: 6rem;
 }
 
 body {
-  @apply antialiased;
+  background-color: var(--color-custom-bg);
+  color: #000000;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-/* Custom gradient animation for hero */
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
+/* =========================================================
+   Custom High-Contrast Scrollbar
+   ========================================================= */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-custom-accent);
+}
+
+/* =========================================================
+   Terminal Custom Scrollbar
+   ========================================================= */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   Marquee Animation
+   ========================================================= */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
   }
-  50% {
-    background-position: 100% 50%;
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
+.animate-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 35s linear infinite;
 }
 
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.05);
-  }
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
-
-@keyframes float-medium {
-  0%, 100% {
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) scale(0.95) rotate(5deg);
-  }
-}
-
-.animate-float-slow {
-  animation: float-slow 10s ease-in-out infinite;
-}
-
-.animate-float-medium {
-  animation: float-medium 7s ease-in-out infinite;
-}
-
-/* Glassmorphism custom components */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.dark .glass-panel {
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-/* Glowing border hover effects */
-.glow-card-hover {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glow-card-hover::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
-  border-radius: inherit;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.glow-card-hover:hover::before {
-  opacity: 1;
-}
-
-.dark .glow-card-hover:hover {
-  box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.2);
-}
-

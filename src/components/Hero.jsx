@@ -1,170 +1,122 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
 import profileImage from "../assets/vandana.jpg";
-import resumeFile from "../resume/VANDANA_RESUME.docx?url";
-import { useTheme } from "../context/ThemeContext";
+import resumeFile from "../resume/Vandana.pdf?url";
+import MiniTerminal from "./ui/MiniTerminal";
 
-const roles = [
-  "Backend Developer",
-  "Full-Stack Developer",
-  "MCA Postgrad Scholar",
-  "Tech Enthusiast"
-];
-
-export default function Hero() {
-  const { theme } = useTheme();
-  const [roleIndex, setRoleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const bgGradient =
-    theme === "dark"
-      ? "from-slate-950 via-slate-900 to-indigo-950/20"
-      : "from-slate-50 via-slate-100 to-indigo-50/40";
-
+export default function Hero({ onOpenContact }) {
   return (
-    <section
-      id="hero"
-      className={`min-h-screen relative flex items-center px-6 pt-28 pb-20 bg-gradient-to-br ${bgGradient} overflow-hidden transition-colors duration-300`}
-    >
-      {/* Premium Floating Animated Background Orbs */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 blur-[100px] animate-pulse pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-purple-500/10 dark:bg-purple-500/20 blur-[120px] animate-pulse delay-700 pointer-events-none" />
-      <div className="absolute top-10 right-1/4 w-60 h-60 rounded-full bg-cyan-500/5 dark:bg-cyan-500/10 blur-[80px] animate-pulse delay-1000 pointer-events-none" />
+    <section className="pt-4 pb-10 px-4 max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-start justify-center">
+      {/* Left Column: ID / Profile Card */}
+      <div className="w-full md:w-1/3 bg-white border-4 border-black rounded-3xl p-6 shadow-neo flex flex-col items-center text-center relative overflow-hidden">
+        {/* Tape decoration */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-[#FDE68A]/80 w-24 h-6 rotate-[-4deg] border border-gray-400 pointer-events-none" />
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+        {/* Profile Avatar */}
+        <div className="w-36 h-36 bg-custom-purple rounded-full border-4 border-black mb-4 flex items-center justify-center overflow-hidden shadow-neo-sm mt-3">
+          <img
+            src={profileImage}
+            alt="Vandana Saharan"
+            className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
+          />
+        </div>
 
-      <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
-        {/* Left - Profile Image with Glow Borders */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="flex justify-center order-2 lg:order-1"
-        >
-          <div className="relative group">
-            {/* Pulsing Backlight */}
-            <div
-              className={`absolute inset-0 rounded-full blur-2xl transition-all duration-500 group-hover:scale-105 opacity-80 ${
-                theme === "dark"
-                  ? "bg-gradient-to-tr from-indigo-500 to-purple-600"
-                  : "bg-gradient-to-tr from-indigo-400/60 to-purple-500/60"
-              }`}
-            />
-            {/* Double Border Frame */}
-            <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 shadow-2xl">
-              <div className={`w-full h-full rounded-full overflow-hidden border-4 ${
-                theme === "dark" ? "border-slate-900" : "border-white"
-              }`}>
-                <img
-                  src={profileImage}
-                  alt="Vandana Saharan"
-                  className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-700"
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        {/* Name & Title */}
+        <h1 className="text-4xl font-shrikhand mb-1 text-black">VANDANA</h1>
+        <div className="bg-black text-white px-3.5 py-1 font-mono text-xs sm:text-sm font-bold rounded-md mb-5 rotate-1 shadow-sm">
+          FULL_STACK_DEVELOPER()
+        </div>
 
-        {/* Right - Content with interactive elements */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="text-center lg:text-left order-1 lg:order-2"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20"
-          >
-            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-ping" />
-            Available for Internships & Projects
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className={`text-4xl md:text-5xl lg:text-6xl font-black mb-4 tracking-tight leading-tight ${
-              theme === "dark" ? "text-white" : "text-slate-900"
-            }`}
-          >
-            Hi, I'm{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 font-extrabold">
-              Vandana Saharan
+        {/* Metadata Details */}
+        <div className="w-full space-y-3 text-left font-bold text-sm font-mono border-t-2 border-black pt-4">
+          <div className="flex items-center">
+            <span className="bg-custom-yellow text-black px-2 py-0.5 border border-black mr-2 text-xs rounded shadow-sm">
+              [LOCATION]
             </span>
-          </motion.h1>
-
-          {/* Dynamic Rotating Subtitle */}
-          <div className="h-12 flex justify-center lg:justify-start items-center mb-6">
-            <AnimatePresence mode="wait">
-              <motion.h2
-                key={roleIndex}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -20, opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="text-2xl md:text-3xl font-bold text-indigo-600 dark:text-indigo-400"
-              >
-                {roles[roleIndex]}
-              </motion.h2>
-            </AnimatePresence>
+            <span className="truncate">Bengaluru, India</span>
           </div>
+          <div className="flex items-center">
+            <span className="bg-custom-green text-black px-2 py-0.5 border border-black mr-2 text-xs rounded shadow-sm">
+              [STATUS]
+            </span>
+            <span className="truncate">MCA Postgrad Scholar</span>
+          </div>
+          <div className="flex items-center">
+            <span className="bg-custom-blue text-black px-2 py-0.5 border border-black mr-2 text-xs rounded shadow-sm">
+              [MISSION]
+            </span>
+            <span className="truncate">Code. Build. Ship.</span>
+          </div>
+        </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className={`text-lg mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium ${
-              theme === "dark" ? "text-slate-300" : "text-slate-600"
-            }`}
+        {/* Action Buttons */}
+        <div className="w-full flex flex-col gap-3 mt-6">
+          <a
+            href={resumeFile}
+            download="Vandana-Saharan-Resume.pdf"
+            className="bg-[#86EFAC] hover:bg-[#4ADE80] text-black w-full py-3 rounded-xl border-2 border-black font-black shadow-neo-sm hover:translate-y-0.5 hover:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer uppercase tracking-wider text-sm"
           >
-            I architect and build clean, scalable backends coupled with smooth,
-            interactive frontends. Specialize in Spring Boot, Node.js, Express, MongoDB, and React.
-          </motion.p>
+            <FaDownload /> DOWNLOAD_RESUME
+          </a>
+          <button
+            onClick={onOpenContact}
+            className="bg-[#FB7185] hover:bg-[#F43F5E] text-white w-full py-3 rounded-xl border-2 border-black font-black shadow-neo-sm hover:translate-y-0.5 hover:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer uppercase tracking-wider text-sm drop-shadow-[1px_1px_0_rgba(0,0,0,1)]"
+          >
+            <FaEnvelope /> CONTACT ME
+          </button>
+        </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+        {/* Social Links */}
+        <div className="flex gap-4 mt-6 text-2xl flex-wrap justify-center items-center">
+          <a
+            href="mailto:vandanasaharan11@gmail.com"
+            title="Email Vandana"
+            className="hover:scale-110 transition-transform text-red-500 hover:rotate-6 p-2 rounded-full border-2 border-transparent hover:border-black hover:bg-yellow-100"
           >
-            <a
-              href={resumeFile}
-              download="Vandana-Saharan-Resume.docx"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-2xl font-bold transition-all shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-1 group"
-            >
-              <svg
-                className="w-5 h-5 mr-3 group-hover:animate-bounce"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2.5}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              Download Resume
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 font-bold rounded-2xl hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-400 dark:hover:text-slate-900 transition-all duration-300 hover:-translate-y-1"
-            >
-              Contact Me
-            </a>
-          </motion.div>
-        </motion.div>
+            <FaEnvelope />
+          </a>
+          <a
+            href="https://github.com/Vandana-Saharan"
+            target="_blank"
+            rel="noreferrer"
+            title="GitHub"
+            className="hover:scale-110 transition-transform text-black hover:-rotate-6 p-2 rounded-full border-2 border-transparent hover:border-black hover:bg-gray-100"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="http://linkedin.com/in/vandana-0bb224283"
+            target="_blank"
+            rel="noreferrer"
+            title="LinkedIn"
+            className="hover:scale-110 transition-transform text-blue-700 hover:rotate-6 p-2 rounded-full border-2 border-transparent hover:border-black hover:bg-blue-100"
+          >
+            <FaLinkedin />
+          </a>
+        </div>
+      </div>
+
+      {/* Right Column: Bio Card + Mini Terminal */}
+      <div className="w-full md:w-2/3 flex flex-col gap-6" id="about">
+        {/* Bio Card in Warm Honey Butter */}
+        <div className="bg-[#FEF9C3] p-6 md:p-10 rounded-3xl border-4 border-black shadow-neo">
+          <h2 className="text-3xl md:text-4xl font-shrikhand mb-5 text-black">
+            Hi people! 👋
+          </h2>
+          <p className="text-base md:text-lg font-medium leading-relaxed mb-4 text-black">
+            I am a <span className="font-bold bg-white px-2.5 py-0.5 border-2 border-black rounded-lg shadow-sm">Master of Computer Applications (MCA) scholar at Kristu Jayanti College, Bengaluru</span>.
+            I architect and engineer clean, scalable backend systems paired with smooth, interactive user interfaces.
+          </p>
+          <p className="text-base md:text-lg font-medium leading-relaxed mb-5 text-black">
+            My core stack is built on <span className="font-bold bg-white px-2.5 py-0.5 border-2 border-black rounded-lg shadow-sm">Spring Boot</span>, <span className="font-bold bg-white px-2.5 py-0.5 border-2 border-black rounded-lg shadow-sm">Node.js / Express</span>, <span className="font-bold bg-white px-2.5 py-0.5 border-2 border-black rounded-lg shadow-sm">MySQL</span>, <span className="font-bold bg-white px-2.5 py-0.5 border-2 border-black rounded-lg shadow-sm">MongoDB</span>, and <span className="font-bold bg-white px-2.5 py-0.5 border-2 border-black rounded-lg shadow-sm">React</span>.
+            I focus on designing clean REST APIs, modular database schemas, and robust software architectures.
+          </p>
+          <div className="bg-white text-black p-4 border-2 border-black rounded-xl inline-block font-bold shadow-neo-sm text-sm md:text-base">
+            🚀 Open to Software Engineering, Backend &amp; Full-Stack Opportunities
+          </div>
+        </div>
+
+        {/* Terminal Widget */}
+        <MiniTerminal />
       </div>
     </section>
   );
